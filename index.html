@@ -10,23 +10,300 @@
     
     <title>Message Motivation Tracker</title>
     
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiTWVzc2FnZSBNb3RpdmF0aW9uIFRyYWNrZXIiLCJzaG9ydF9uYW1lIjoiTXNnTW90aXYiLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsInRoZW1lX2NvbG9yIjoiIzY2N2VlYSIsImJhY2tncm91bmRfY29sb3IiOiIjZjdmYWZjIiwic3RhcnRfdXJsIjoiLyIsInNjb3BlIjoiLyIsImljb25zIjpbeyJzcmMiOiJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUIzYVdSMGFEMGlNakEwSWlCb1pXbG5hSFE5SWpJd05DSWdkbWxsZDBKdmVEMGlNQ0F3SURJD05DQXlNRFFpSUdobGJXNXpQU0pvZEhSd09pOHZkM2QzTG5jekxtOXlaeTh5TURBd0wzTjJaeUkrUEhKbFkzUWdlRDBpTVRBaUlIazlJakV3SWlCM2FXUjBhRDBpTVRnMElpQm9aV2xuYUhROUlqRTROQ0lnY25nOUlqRXlJaUJtYVd4c1BTSWlOamMzWldWaklpOCtQSFJsZUhRZ2VEMGlOakFpSUhrOUlqWXdJaUJtYVd4c1BTSWlabVptSWlCbWIyNTBMWE5wZW1VOUlqRTRJaUJtYjI1MExXWmhiV2xzZVQwaWMyRnVjeTF6WlhKcFppSWdkR1Y0ZEMxaGJtTm9iM0k5SW0xcFpHUnNaU0krOEoyUXFDQXQ4SjJRbnpBM1B5OW1iMjVuWDNaaGNtbGhibTU5T2p3dmRHVjRkRDQ4TDNOMlp6ND0iLCJzaXplcyI6IjE5MngxOTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9LHsic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTlRFeUlpQm9aV2xuYUhROUlqVXhNaUlnZG1sbGQwSnZlRDBpTUNBd0lEVXhNaUExTVRJaUlHaHRiRzV6UFNKb2RIUndPaTh2ZDNkM0xuY3pMbTl5Wnk4eU1EQXdMM04yWnlJK1BISmxZM1FnZUQwaU1qUWlJSGs5SWpJMElpQjNhV1IwYUQwaU5EWTBJaUJvWldsbmFIUTlJalEyTkNJZ2NuZzlJak13SWlCbWFXeHNQU0lpTmpjM1pXVmhJaTgrUEhSbGVIUWdlRDBpTVRRMElpQjVQU0kxTWpBaUlHWnBiR3c5SWlabVptWWlJR1p2Ym5RdGMybDZaVDBpTkRnaUlHWnZiblF0Wm1GdGFXeDVQU0p6WVc1ekxYTmxjbWxtSWlCMFpYaDBMV0Z1WTJodmNqMGliV2xrWkd4bElqNzhObkJiZW05NjhnT2tJSXZKZ0l2Zm54QXo4U2duSkNZaUpBL1BpOXBZV2Q2UGVzNHp6QStQeUIwWlhoMFBqd3ZjM1puUGc9PSIsInNpemVzIjoiNTEyeDUxMiIsInR5cGUiOiJpbWFnZS9zdmcreG1sIn1dfQ==">
-    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9IiM2NjdlZWEiLz4KPHN2ZyB4PSI0OCIgeT0iNDgiIHdpZHRoPSI5NiIgaGVpZ2h0PSI5NiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIj4KICA8cGF0aCBkPSJNMTIgMkwyIDcgMTIgMTIgMjIgNyAxMiAyWiIgZmlsbD0iI2ZmZiIvPgogIDxwYXRoIGQ9Ik0yIDEyTDEyIDE3IDIyIDEyIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4KPC9zdmc+">
-    
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        // Timer Functions - Global verfügbar
+        function startMessageTimer(seconds) {
+            console.log('Starting timer with', seconds, 'seconds');
+            
+            messageTimer.duration = seconds;
+            messageTimer.remaining = seconds;
+            messageTimer.isRunning = false;
+            
+            const timerDisplay = document.getElementById('timerDisplay');
+            const customInput = document.getElementById('customTimerInput');
+            
+            if (timerDisplay) {
+                timerDisplay.style.display = 'block';
+                console.log('Timer display shown');
+            }
+            if (customInput) {
+                customInput.style.display = 'none';
+            }
+            
+            updateTimerDisplay();
+            
+            showToast(`⏰ ${Math.floor(seconds/60)} Minuten Timer bereit!`);
+        }
+
+        function showCustomTimer() {
+            console.log('Showing custom timer input');
+            
+            const customInput = document.getElementById('customTimerInput');
+            const timerDisplay = document.getElementById('timerDisplay');
+            
+            if (customInput) {
+                customInput.style.display = 'block';
+                console.log('Custom input shown');
+            }
+            if (timerDisplay) {
+                timerDisplay.style.display = 'none';
+            }
+        }
+
+        function setCustomTimer() {
+            const minutes = parseInt(document.getElementById('customMinutes').value) || 15;
+            const seconds = minutes * 60;
+            console.log('Setting custom timer:', minutes, 'minutes =', seconds, 'seconds');
+            startMessageTimer(seconds);
+        }
+
+        function toggleTimer() {
+            console.log('Toggle timer called, isRunning:', messageTimer.isRunning);
+            
+            if (messageTimer.isRunning) {
+                pauseTimer();
+            } else {
+                startTimer();
+            }
+        }
+
+        function resetTimer() {
+            console.log('Resetting timer');
+            
+            messageTimer.isRunning = false;
+            clearInterval(messageTimer.interval);
+            messageTimer.remaining = messageTimer.duration;
+            
+            updateTimerDisplay();
+            
+            const timerButton = document.getElementById('timerButton');
+            const timerStatus = document.getElementById('timerStatus');
+            
+            if (timerButton) {
+                timerButton.innerHTML = '▶️ Start';
+            }
+            if (timerStatus) {
+                timerStatus.textContent = 'Timer bereit';
+            }
+            
+            showToast('🔄 Timer zurückgesetzt');
+        }
+
+        function stopTimer() {
+            console.log('Stopping timer');
+            
+            messageTimer.isRunning = false;
+            clearInterval(messageTimer.interval);
+            
+            const timerDisplay = document.getElementById('timerDisplay');
+            const customInput = document.getElementById('customTimerInput');
+            
+            if (timerDisplay) {
+                timerDisplay.style.display = 'none';
+            }
+            if (customInput) {
+                customInput.style.display = 'none';
+            }
+            
+            showToast('⏹️ Timer gestoppt');
+        }
+
+        // Immediately available for onclick
+        window.startMessageTimer = startMessageTimer;
+        window.showCustomTimer = showCustomTimer;
+        window.setCustomTimer = setCustomTimer;
+        window.toggleTimer = toggleTimer;
+        window.resetTimer = resetTimer;
+        window.stopTimer = stopTimer;
+
+        function startTimer() {
+            console.log('Starting timer countdown');
+            
+            messageTimer.isRunning = true;
+            
+            messageTimer.interval = setInterval(() => {
+                messageTimer.remaining--;
+                console.log('Timer tick:', messageTimer.remaining);
+                updateTimerDisplay();
+                
+                if (messageTimer.remaining <= 0) {
+                    console.log('Timer finished!');
+                    finishTimer();
+                }
+            }, 1000);
+            
+            const timerButton = document.getElementById('timerButton');
+            const timerStatus = document.getElementById('timerStatus');
+            
+            if (timerButton) {
+                timerButton.innerHTML = '⏸️ Pause';
+            }
+            if (timerStatus) {
+                timerStatus.textContent = 'Timer läuft - fokussiert arbeiten!';
+            }
+            
+            // Vibration bei Start (falls unterstützt)
+            if (navigator.vibrate) {
+                navigator.vibrate(100);
+            }
+            
+            showToast('▶️ Timer gestartet!');
+        }
+
+        function pauseTimer() {
+            console.log('Pausing timer');
+            
+            messageTimer.isRunning = false;
+            clearInterval(messageTimer.interval);
+            
+            const timerButton = document.getElementById('timerButton');
+            const timerStatus = document.getElementById('timerStatus');
+            
+            if (timerButton) {
+                timerButton.innerHTML = '▶️ Weiter';
+            }
+            if (timerStatus) {
+                timerStatus.textContent = 'Timer pausiert';
+            }
+            
+            showToast('⏸️ Timer pausiert');
+        }
+
+        function resetTimer() {
+            console.log('Resetting timer');
+            
+            messageTimer.isRunning = false;
+            clearInterval(messageTimer.interval);
+            messageTimer.remaining = messageTimer.duration;
+            
+            updateTimerDisplay();
+            
+            const timerButton = document.getElementById('timerButton');
+            const timerStatus = document.getElementById('timerStatus');
+            
+            if (timerButton) {
+                timerButton.innerHTML = '▶️ Start';
+            }
+            if (timerStatus) {
+                timerStatus.textContent = 'Timer bereit';
+            }
+            
+            showToast('🔄 Timer zurückgesetzt');
+        }
+
+        function stopTimer() {
+            console.log('Stopping timer');
+            
+            messageTimer.isRunning = false;
+            clearInterval(messageTimer.interval);
+            
+            const timerDisplay = document.getElementById('timerDisplay');
+            const customInput = document.getElementById('customTimerInput');
+            
+            if (timerDisplay) {
+                timerDisplay.style.display = 'none';
+            }
+            if (customInput) {
+                customInput.style.display = 'none';
+            }
+            
+            showToast('⏹️ Timer gestoppt');
+        }
+
+        function finishTimer() {
+            console.log('Timer finished!');
+            
+            messageTimer.isRunning = false;
+            clearInterval(messageTimer.interval);
+            
+            const timerStatus = document.getElementById('timerStatus');
+            const timerButton = document.getElementById('timerButton');
+            
+            if (timerStatus) {
+                timerStatus.textContent = '🎉 Zeit ist um! Gut gemacht!';
+            }
+            if (timerButton) {
+                timerButton.innerHTML = '🔄 Neue Session';
+                timerButton.onclick = function() {
+                    const timerDisplay = document.getElementById('timerDisplay');
+                    if (timerDisplay) {
+                        timerDisplay.style.display = 'none';
+                    }
+                    showToast('Wähle eine neue Timer-Session!');
+                };
+            }
+            
+            // Vibrationen bei Fertigstellung
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200, 100, 200]);
+            }
+            
+            // Notification sound attempt
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = 800;
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.5);
+            } catch (e) {
+                console.log('Audio not supported:', e);
+            }
+            
+            showToast('🎉 Nachrichtensession beendet! Super gemacht!');
+            
+            // Alert als Backup
+            alert('🎉 Timer beendet! Zeit ist um!');
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(messageTimer.remaining / 60);
+            const seconds = messageTimer.remaining % 60;
+            const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            const timerTime = document.getElementById('timerTime');
+            if (timerTime) {
+                timerTime.textContent = timeString;
+                
+                // Farbe basierend auf verbleibender Zeit
+                const percentage = messageTimer.remaining / messageTimer.duration;
+                
+                if (percentage > 0.5) {
+                    timerTime.style.color = '#667eea';
+                } else if (percentage > 0.25) {
+                    timerTime.style.color = '#f39c12';
+                } else {
+                    timerTime.style.color = '#e74c3c';
+                }
+            }
+            
+            console.log('Timer display updated:', timeString);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Apple Color Emoji', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             color: #333;
             overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
         }
 
         .app-container {
@@ -38,7 +315,6 @@
             position: relative;
         }
 
-        /* Header */
         .header {
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(20px);
@@ -65,7 +341,6 @@
             gap: 5px;
         }
 
-        /* Navigation */
         .nav-tabs {
             display: flex;
             background: rgba(255, 255, 255, 0.9);
@@ -74,13 +349,13 @@
 
         .nav-tab {
             flex: 1;
-            padding: 15px;
+            padding: 15px 8px;
             text-align: center;
             background: none;
             border: none;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 14px;
+            font-size: 12px;
             color: #666;
         }
 
@@ -90,7 +365,6 @@
             border-bottom: 2px solid #667eea;
         }
 
-        /* Content Sections */
         .content {
             padding: 20px;
         }
@@ -103,7 +377,6 @@
             display: block;
         }
 
-        /* Mood Check-in */
         .mood-checkin {
             background: rgba(255, 255, 255, 0.8);
             border-radius: 16px;
@@ -153,7 +426,6 @@
             margin: 15px 0;
         }
 
-        /* Buttons */
         .btn {
             background: #667eea;
             color: white;
@@ -172,10 +444,6 @@
             transform: translateY(-2px);
         }
 
-        .btn:active {
-            transform: translateY(0);
-        }
-
         .btn-secondary {
             background: rgba(102, 126, 234, 0.1);
             color: #667eea;
@@ -185,7 +453,6 @@
             background: rgba(102, 126, 234, 0.2);
         }
 
-        /* Templates */
         .template-grid {
             display: grid;
             gap: 12px;
@@ -218,12 +485,11 @@
             justify-content: space-between;
         }
 
-        /* Stats */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            margin-top: 20px;
+            margin: 20px 0;
         }
 
         .stat-card {
@@ -245,7 +511,6 @@
             margin-top: 5px;
         }
 
-        /* Charts */
         .chart-container {
             background: rgba(255, 255, 255, 0.8);
             border-radius: 12px;
@@ -262,36 +527,99 @@
             text-align: center;
         }
 
-        /* iOS Install Prompt */
-        .ios-install {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
+        .coach-options {
+            display: grid;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .coach-option {
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .coach-option:hover {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .option-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .option-subtitle {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .coach-message {
+            margin: 10px 0;
+            animation: slideIn 0.3s ease;
+        }
+
+        .coach-message.bot {
+            text-align: left;
+        }
+
+        .coach-message.user {
+            text-align: right;
+        }
+
+        .message-bubble {
+            display: inline-block;
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            margin: 3px;
+            word-wrap: break-word;
+        }
+
+        .message-bubble.bot {
+            background: rgba(102, 126, 234, 0.1);
+            color: #333;
+            border-bottom-left-radius: 6px;
+        }
+
+        .message-bubble.user {
             background: #667eea;
             color: white;
-            padding: 15px;
-            text-align: center;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-            z-index: 1000;
+            border-bottom-right-radius: 6px;
         }
 
-        .ios-install.show {
-            transform: translateY(0);
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 15px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            margin: 10px 5px;
+            max-width: fit-content;
         }
 
-        .ios-install button {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            margin: 5px;
-            cursor: pointer;
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: #667eea;
+            border-radius: 50%;
+            animation: typingDot 1.4s infinite ease-in-out;
         }
 
-        /* Responsive */
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typingDot {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
         @media (max-width: 480px) {
             .app-container {
                 max-width: 100%;
@@ -301,33 +629,9 @@
                 padding: 15px;
             }
         }
-
-        /* Offline indicator */
-        .offline-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: #ff6b6b;
-            color: white;
-            text-align: center;
-            padding: 5px;
-            font-size: 12px;
-            z-index: 1000;
-            transform: translateY(-100%);
-            transition: transform 0.3s ease;
-        }
-
-        .offline-indicator.show {
-            transform: translateY(0);
-        }
     </style>
 </head>
 <body>
-    <div class="offline-indicator" id="offlineIndicator">
-        📵 Offline - Daten werden lokal gespeichert
-    </div>
-
     <div class="app-container">
         <header class="header">
             <h1>📱 Message Motivation</h1>
@@ -337,15 +641,40 @@
         </header>
 
         <nav class="nav-tabs">
-            <button class="nav-tab active" onclick="showSection('mood')">🎭 Stimmung</button>
+            <button class="nav-tab active" onclick="showSection('coach')">🤖 Coach</button>
+            <button class="nav-tab" onclick="showSection('mood')">📊 Stimmung</button>
             <button class="nav-tab" onclick="showSection('templates')">💬 Templates</button>
-            <button class="nav-tab" onclick="showSection('stats')">📊 Stats</button>
+            <button class="nav-tab" onclick="showSection('stats')">📈 Stats</button>
             <button class="nav-tab" onclick="showSection('settings')">⚙️ Settings</button>
         </nav>
 
         <main class="content">
+            <!-- Coach Section -->
+            <section id="coach" class="section active">
+                <div class="mood-checkin">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="font-size: 48px; margin-bottom: 10px;">🤖</div>
+                        <h2>Dein Message Coach</h2>
+                        <p>Lass uns gemeinsam schauen, wie es dir heute geht!</p>
+                    </div>
+                    
+                    <div id="coachConversation" style="max-height: 300px; overflow-y: auto; margin: 20px 0; padding: 10px; background: rgba(0,0,0,0.05); border-radius: 8px;">
+                        <!-- Coach messages appear here -->
+                    </div>
+                    
+                    <div id="coachInputArea">
+                        <button class="btn" onclick="startCoach()">🚀 Coach starten</button>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button class="btn-secondary btn" onclick="resetCoach()" style="flex: 1;">🔄 Neustart</button>
+                        <button class="btn-secondary btn" onclick="skipToMood()" style="flex: 1;">💬 Direkt zur Stimmung</button>
+                    </div>
+                </div>
+            </section>
+
             <!-- Mood Section -->
-            <section id="mood" class="section active">
+            <section id="mood" class="section">
                 <div class="mood-checkin">
                     <div class="mood-question">
                         Wie fühlst du dich beim Gedanken an deine ungelesenen Nachrichten?
@@ -376,11 +705,6 @@
                         <div class="stat-label">Ø Stimmung 7T</div>
                     </div>
                 </div>
-
-                <div class="chart-container">
-                    <div class="chart-title">Stimmungsverlauf letzte 7 Tage</div>
-                    <canvas id="moodChart" width="100%" height="150"></canvas>
-                </div>
             </section>
 
             <!-- Templates Section -->
@@ -388,6 +712,62 @@
                 <div class="mood-checkin">
                     <div class="mood-question">Template für deine aktuelle Stimmung:</div>
                     <div id="currentMoodTemplate">Erfasse zuerst deine Stimmung im Stimmung-Tab</div>
+                </div>
+
+                <!-- Message Timer -->
+                <div class="mood-checkin">
+                    <h3>⏰ Nachrichtensession-Timer</h3>
+                    <p style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                        Wissenschaftlich empfohlene Zeitfenster für fokussiertes Antworten
+                    </p>
+                    
+                    <div class="coach-options">
+                        <div class="coach-option" onclick="startMessageTimer(300)">
+                            <div class="option-title">⚡ Quick Session (5 Min)</div>
+                            <div class="option-subtitle">Für 1-3 kurze Antworten</div>
+                        </div>
+                        <div class="coach-option" onclick="startMessageTimer(900)">
+                            <div class="option-title">🎯 Focus Session (15 Min)</div>
+                            <div class="option-subtitle">Optimale Konzentrationsspanne</div>
+                        </div>
+                        <div class="coach-option" onclick="startMessageTimer(1500)">
+                            <div class="option-title">📝 Deep Session (25 Min)</div>
+                            <div class="option-subtitle">Pomodoro-Technik für viele Nachrichten</div>
+                        </div>
+                        <div class="coach-option" onclick="showCustomTimer()">
+                            <div class="option-title">⚙️ Eigene Zeit</div>
+                            <div class="option-subtitle">Individuell anpassen</div>
+                        </div>
+                    </div>
+                    
+                    <div id="timerDisplay" style="display: none; text-align: center; padding: 20px; background: rgba(102, 126, 234, 0.1); border-radius: 12px; margin-top: 15px;">
+                        <div style="font-size: 32px; font-weight: bold; color: #667eea; margin-bottom: 10px;" id="timerTime">
+                            25:00
+                        </div>
+                        <div style="font-size: 14px; color: #666; margin-bottom: 15px;" id="timerStatus">
+                            Timer bereit
+                        </div>
+                        <div style="display: flex; gap: 10px; justify-content: center;">
+                            <button class="btn" onclick="toggleTimer()" id="timerButton" style="flex: 1;">
+                                ▶️ Start
+                            </button>
+                            <button class="btn-secondary btn" onclick="resetTimer()" style="flex: 1;">
+                                🔄 Reset
+                            </button>
+                            <button class="btn-secondary btn" onclick="stopTimer()" style="flex: 1;">
+                                ⏹️ Stopp
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="customTimerInput" style="display: none; padding: 15px; background: rgba(102, 126, 234, 0.05); border-radius: 12px; margin-top: 15px;">
+                        <label style="display: block; margin-bottom: 10px; font-weight: bold;">Zeit in Minuten:</label>
+                        <input type="number" id="customMinutes" min="1" max="120" value="15" 
+                               style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 10px;">
+                        <button class="btn" onclick="setCustomTimer()">
+                            Timer setzen
+                        </button>
+                    </div>
                 </div>
 
                 <div class="template-grid" id="templateGrid">
@@ -406,22 +786,12 @@
                         <div class="stat-number" id="streak">0</div>
                         <div class="stat-label">Tage-Serie</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="bestDay">-</div>
-                        <div class="stat-label">Bester Tag</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="improvement">-</div>
-                        <div class="stat-label">Trend</div>
-                    </div>
                 </div>
 
                 <div class="chart-container">
-                    <div class="chart-title">Wetter vs. Stimmung Korrelation</div>
-                    <canvas id="weatherChart" width="100%" height="150"></canvas>
+                    <div class="chart-title">Stimmungsverlauf letzte 7 Tage</div>
+                    <canvas id="moodChart" width="100%" height="150"></canvas>
                 </div>
-
-                <button class="btn-secondary btn" onclick="exportData()">📤 Daten exportieren</button>
             </section>
 
             <!-- Settings Section -->
@@ -429,43 +799,9 @@
                 <div class="mood-checkin">
                     <h3>📱 App Einstellungen</h3>
                     
-                    <label style="display: block; margin: 15px 0;">
-                        <input type="checkbox" id="weatherEnabled" checked> Wetter-Tracking aktivieren
-                    </label>
-                    
-                    <label style="display: block; margin: 15px 0;">
-                        <input type="checkbox" id="notificationsEnabled"> Browser-Benachrichtigungen
-                    </label>
-                </div>
-
-                <div class="mood-checkin">
-                    <h3>💾 Backup & Import</h3>
-                    
-                    <button class="btn" onclick="createBackup()">📤 Backup erstellen</button>
-                    
-                    <div style="margin: 15px 0;">
-                        <label for="importFile" class="btn btn-secondary" style="display: inline-block; cursor: pointer;">
-                            📥 Backup importieren
-                        </label>
-                        <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importBackup(event)">
-                    </div>
-                    
-                    <button class="btn" onclick="createQRBackup()">📱 QR-Code Backup</button>
-                    
-                    <div id="qrCodeContainer" style="text-align: center; margin: 15px 0; display: none;">
-                        <canvas id="qrCanvas" width="200" height="200" style="border: 1px solid #ddd; border-radius: 8px;"></canvas>
-                        <div style="font-size: 12px; color: #666; margin-top: 10px;">
-                            QR-Code auf anderem Gerät scannen um Daten zu übertragen
-                        </div>
-                    </div>
-                    
-                    <button class="btn btn-secondary" onclick="showAutoBackup()">⚙️ Auto-Backup</button>
-                </div>
-
-                <div class="mood-checkin">
-                    <h3>🔧 Wartung</h3>
+                    <button class="btn-secondary btn" onclick="exportData()">📤 Daten exportieren</button>
+                    <button class="btn-secondary btn" onclick="importData()">📥 Daten importieren</button>
                     <button class="btn-secondary btn" onclick="clearAllData()">🗑️ Alle Daten löschen</button>
-                    <button class="btn-secondary btn" onclick="showInstallInstructions()">📱 App installieren</button>
                     
                     <div style="margin-top: 20px; font-size: 12px; color: #666; text-align: center;">
                         Version 1.0 | Made with ❤️ for better mental health
@@ -475,1038 +811,223 @@
         </main>
     </div>
 
-    <!-- iOS Install Prompt -->
-    <div class="ios-install" id="iosInstall">
-        <div style="margin-bottom: 10px;">📱 Für beste Erfahrung als App installieren</div>
-        <div style="font-size: 12px; margin-bottom: 10px;">
-            Tippe auf <strong>Teilen</strong> → <strong>Zum Home-Bildschirm</strong>
-        </div>
-        <button onclick="dismissInstallPrompt()">Später</button>
-        <button onclick="showInstallInstructions()">Anleitung</button>
-    </div>
+    <input type="file" id="importFile" accept=".json" style="display: none;" onchange="handleFileImport(event)">
 
     <script>
-        // App Configuration
-        const CONFIG = {
-            WEATHER_API_KEY: 'bd5e378503939ddaee76f12ad7a97608', // Free public key
-            LOCATION: 'Hannover,DE',
-            CACHE_DURATION: 30 * 60 * 1000, // 30 minutes
-        };
-
         // Global State
         let currentMood = 5;
         let moodData = [];
         let weatherData = null;
-
-        // Templates based on mood level
-        const TEMPLATES = {
-            low: [
-                {
-                    text: "Sorry für die späte Antwort, mir ging es nicht so gut 😔",
-                    category: "Ehrlich"
-                },
-                {
-                    text: "Entschuldige, ich durchlebe gerade eine schwere Zeit und brauche etwas länger zum Antworten",
-                    category: "Offen"
-                },
-                {
-                    text: "Hi! Kurze Antwort heute - mir fällt kommunizieren momentan schwer, aber wollte dir trotzdem antworten 💙",
-                    category: "Freundlich"
-                }
-            ],
-            medium: [
-                {
-                    text: "Hey! Danke für deine Nachricht. Mir geht's okay, brauche nur manchmal etwas länger zum Antworten 😊",
-                    category: "Neutral"
-                },
-                {
-                    text: "Hallo! Entschuldige die Verspätung, war etwas beschäftigt. Wie geht's dir denn?",
-                    category: "Freundlich"
-                }
-            ],
-            high: [
-                {
-                    text: "Hey! Danke für deine Nachricht! Mir geht's heute richtig gut und ich freue mich zu antworten 😊",
-                    category: "Positiv"
-                },
-                {
-                    text: "Hi! Schön von dir zu hören! Ich bin heute motiviert und hab Lust zu schreiben ✨",
-                    category: "Energisch"
-                }
-            ]
+        let messageTimer = {
+            isRunning: false,
+            duration: 0,
+            remaining: 0,
+            interval: null
+        };
+        let coachState = {
+            step: 0,
+            responses: {},
+            isActive: false
         };
 
-        // Feature Detection
-        const FEATURES = {
-            webShare: !!navigator.share,
-            geolocation: !!navigator.geolocation,
-            serviceWorker: 'serviceWorker' in navigator,
-            notification: 'Notification' in window,
-            standalone: window.matchMedia('(display-mode: standalone)').matches
-        };
-
-        // Initialize App
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeApp();
-        });
-
-        function initializeApp() {
-            console.log('🚀 Message Motivation Tracker starting...');
+        // =================== TIMER FUNCTIONS ===================
+        function startMessageTimer(seconds) {
+            console.log('Starting timer with', seconds, 'seconds');
             
-            // Register Service Worker
-            if (FEATURES.serviceWorker) {
-                registerServiceWorker();
+            messageTimer.duration = seconds;
+            messageTimer.remaining = seconds;
+            messageTimer.isRunning = false;
+            
+            const timerDisplay = document.getElementById('timerDisplay');
+            const customInput = document.getElementById('customTimerInput');
+            
+            if (timerDisplay) {
+                timerDisplay.style.display = 'block';
+                console.log('Timer display shown');
+            }
+            if (customInput) {
+                customInput.style.display = 'none';
             }
             
-            // Load saved data
-            loadMoodData();
-            updateUI();
+            updateTimerDisplay();
             
-            // Setup event listeners
-            setupEventListeners();
-            
-            // Load weather
-            loadWeather();
-            
-            // Check for iOS install prompt
-            checkiOSInstall();
-            
-            // Check online status
-            updateOnlineStatus();
-            
-            console.log('✅ App initialized successfully');
+            showToast(`⏰ ${Math.floor(seconds/60)} Minuten Timer bereit!`);
         }
 
-        function setupEventListeners() {
-            // Mood slider
-            const moodSlider = document.getElementById('moodSlider');
-            moodSlider.addEventListener('input', function() {
-                currentMood = parseInt(this.value);
-                updateMoodDisplay();
-                updateCurrentTemplate();
-            });
-
-            // Online/offline events
-            window.addEventListener('online', updateOnlineStatus);
-            window.addEventListener('offline', updateOnlineStatus);
-        }
-
-        function updateMoodDisplay() {
-            const moodEmojis = ['😭', '😰', '😟', '😐', '😐', '🙂', '🙂', '😊', '😊', '😄'];
-            const display = document.getElementById('moodDisplay');
-            display.textContent = `${moodEmojis[currentMood - 1]} ${currentMood}/10`;
-        }
-
-        function updateCurrentTemplate() {
-            const templateDiv = document.getElementById('currentMoodTemplate');
-            let category, templates;
+        function showCustomTimer() {
+            console.log('Showing custom timer input');
             
-            if (currentMood <= 3) {
-                category = 'low';
-                templates = TEMPLATES.low;
-            } else if (currentMood <= 7) {
-                category = 'medium';
-                templates = TEMPLATES.medium;
+            const customInput = document.getElementById('customTimerInput');
+            const timerDisplay = document.getElementById('timerDisplay');
+            
+            if (customInput) {
+                customInput.style.display = 'block';
+                console.log('Custom input shown');
+            }
+            if (timerDisplay) {
+                timerDisplay.style.display = 'none';
+            }
+        }
+
+        function setCustomTimer() {
+            const minutes = parseInt(document.getElementById('customMinutes').value) || 15;
+            const seconds = minutes * 60;
+            console.log('Setting custom timer:', minutes, 'minutes =', seconds, 'seconds');
+            startMessageTimer(seconds);
+        }
+
+        function toggleTimer() {
+            console.log('Toggle timer called, isRunning:', messageTimer.isRunning);
+            
+            if (messageTimer.isRunning) {
+                pauseTimer();
             } else {
-                category = 'high';
-                templates = TEMPLATES.high;
+                startTimer();
             }
-            
-            const randomTemplate = templates[Math.floor(Math.random() * templates.length)];
-            templateDiv.innerHTML = `
-                <div style="background: rgba(102, 126, 234, 0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">
-                    <div style="margin-bottom: 10px;">${randomTemplate.text}</div>
-                    <button class="btn" onclick="shareTemplate('${randomTemplate.text.replace(/'/g, "\\'")}')">
-                        ${FEATURES.webShare ? '📤 Teilen' : '📋 Kopieren'}
-                    </button>
-                </div>
-            `;
         }
 
-        async function shareTemplate(text) {
-            if (FEATURES.webShare) {
-                try {
-                    await navigator.share({
-                        text: text
-                    });
-                    console.log('✅ Template shared successfully');
-                } catch (err) {
-                    if (err.name !== 'AbortError') {
-                        console.warn('Share failed, falling back to clipboard');
-                        copyToClipboard(text);
-                    }
+        function startTimer() {
+            console.log('Starting timer countdown');
+            
+            messageTimer.isRunning = true;
+            
+            messageTimer.interval = setInterval(() => {
+                messageTimer.remaining--;
+                console.log('Timer tick:', messageTimer.remaining);
+                updateTimerDisplay();
+                
+                if (messageTimer.remaining <= 0) {
+                    console.log('Timer finished!');
+                    finishTimer();
                 }
-            } else {
-                copyToClipboard(text);
-            }
-        }
-
-        function copyToClipboard(text) {
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text).then(() => {
-                    showToast('✅ In Zwischenablage kopiert');
-                }).catch(() => {
-                    fallbackCopy(text);
-                });
-            } else {
-                fallbackCopy(text);
-            }
-        }
-
-        function fallbackCopy(text) {
-            const textArea = document.createElement('textarea');
-            textArea.value = text;
-            textArea.style.position = 'fixed';
-            textArea.style.opacity = '0';
-            document.body.appendChild(textArea);
-            textArea.select();
+            }, 1000);
             
-            try {
-                document.execCommand('copy');
-                showToast('✅ In Zwischenablage kopiert');
-            } catch (err) {
-                showToast('❌ Kopieren fehlgeschlagen');
+            const timerButton = document.getElementById('timerButton');
+            const timerStatus = document.getElementById('timerStatus');
+            
+            if (timerButton) {
+                timerButton.innerHTML = '⏸️ Pause';
+            }
+            if (timerStatus) {
+                timerStatus.textContent = 'Timer läuft - fokussiert arbeiten!';
             }
             
-            document.body.removeChild(textArea);
-        }
-
-        function saveMoodEntry() {
-            const messageCount = document.getElementById('messageCount').value || 0;
-            const timestamp = new Date();
-            
-            const entry = {
-                timestamp: timestamp.toISOString(),
-                mood: currentMood,
-                messageCount: parseInt(messageCount),
-                weather: weatherData ? weatherData.main.temp : null,
-                weatherDesc: weatherData ? weatherData.weather[0].main : null
-            };
-            
-            moodData.push(entry);
-            saveMoodData();
-            updateUI();
-            
-            // Clear message count input
-            document.getElementById('messageCount').value = '';
-            
-            showToast(`✅ Stimmung ${currentMood}/10 gespeichert`);
-        }
-
-        function loadMoodData() {
-            try {
-                const saved = localStorage.getItem('moodData');
-                moodData = saved ? JSON.parse(saved) : [];
-                console.log(`📊 Loaded ${moodData.length} mood entries`);
-            } catch (err) {
-                console.error('Failed to load mood data:', err);
-                moodData = [];
-            }
-        }
-
-        function saveMoodData() {
-            try {
-                localStorage.setItem('moodData', JSON.stringify(moodData));
-                console.log(`💾 Saved ${moodData.length} mood entries`);
-            } catch (err) {
-                console.error('Failed to save mood data:', err);
-            }
-        }
-
-        function updateUI() {
-            updateStats();
-            updateTemplateGrid();
-            updateCharts();
-        }
-
-        function updateStats() {
-            const today = new Date().toDateString();
-            const todayEntries = moodData.filter(entry => 
-                new Date(entry.timestamp).toDateString() === today
-            ).length;
-            
-            document.getElementById('todayEntries').textContent = todayEntries;
-            
-            // Calculate 7-day average mood
-            const last7Days = moodData.filter(entry => {
-                const entryDate = new Date(entry.timestamp);
-                const weekAgo = new Date();
-                weekAgo.setDate(weekAgo.getDate() - 7);
-                return entryDate >= weekAgo;
-            });
-            
-            if (last7Days.length > 0) {
-                const avgMood = (last7Days.reduce((sum, entry) => sum + entry.mood, 0) / last7Days.length).toFixed(1);
-                document.getElementById('avgMood').textContent = avgMood;
-            } else {
-                document.getElementById('avgMood').textContent = '-';
+            if (navigator.vibrate) {
+                navigator.vibrate(100);
             }
             
-            // Total entries
-            document.getElementById('totalEntries').textContent = moodData.length;
-            
-            // Calculate streak
-            calculateStreak();
-            
-            // Best day
-            findBestDay();
-            
-            // Trend
-            calculateTrend();
+            showToast('▶️ Timer gestartet!');
         }
 
-        function calculateStreak() {
-            if (moodData.length === 0) {
-                document.getElementById('streak').textContent = '0';
-                return;
+        function pauseTimer() {
+            console.log('Pausing timer');
+            
+            messageTimer.isRunning = false;
+            clearInterval(messageTimer.interval);
+            
+            const timerButton = document.getElementById('timerButton');
+            const timerStatus = document.getElementById('timerStatus');
+            
+            if (timerButton) {
+                timerButton.innerHTML = '▶️ Weiter';
+            }
+            if (timerStatus) {
+                timerStatus.textContent = 'Timer pausiert';
             }
             
-            const sortedEntries = moodData.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-            const uniqueDays = new Set();
-            let streak = 0;
-            let currentDate = new Date();
+            showToast('⏸️ Timer pausiert');
+        }
+
+        function resetTimer() {
+            console.log('Resetting timer');
             
-            for (const entry of sortedEntries) {
-                const entryDate = new Date(entry.timestamp).toDateString();
-                const checkDate = currentDate.toDateString();
+            messageTimer.isRunning = false;
+            clearInterval(messageTimer.interval);
+            messageTimer.remaining = messageTimer.duration;
+            
+            updateTimerDisplay();
+            
+            const timerButton = document.getElementById('timerButton');
+            const timerStatus = document.getElementById('timerStatus');
+            
+            if (timerButton) {
+                timerButton.innerHTML = '▶️ Start';
+            }
+            if (timerStatus) {
+                timerStatus.textContent = 'Timer bereit';
+            }
+            
+            showToast('🔄 Timer zurückgesetzt');
+        }
+
+        function stopTimer() {
+            console.log('Stopping timer');
+            
+            messageTimer.isRunning = false;
+            clearInterval(messageTimer.interval);
+            
+            const timerDisplay = document.getElementById('timerDisplay');
+            const customInput = document.getElementById('customTimerInput');
+            
+            if (timerDisplay) {
+                timerDisplay.style.display = 'none';
+            }
+            if (customInput) {
+                customInput.style.display = 'none';
+            }
+            
+            showToast('⏹️ Timer gestoppt');
+        }
+
+        function finishTimer() {
+            console.log('Timer finished!');
+            
+            messageTimer.isRunning = false;
+            clearInterval(messageTimer.interval);
+            
+            const timerStatus = document.getElementById('timerStatus');
+            const timerButton = document.getElementById('timerButton');
+            
+            if (timerStatus) {
+                timerStatus.textContent = '🎉 Zeit ist um! Gut gemacht!';
+            }
+            if (timerButton) {
+                timerButton.innerHTML = '🔄 Neue Session';
+            }
+            
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200, 100, 200]);
+            }
+            
+            showToast('🎉 Nachrichtensession beendet! Super gemacht!');
+            alert('🎉 Timer beendet! Zeit ist um!');
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(messageTimer.remaining / 60);
+            const seconds = messageTimer.remaining % 60;
+            const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            const timerTime = document.getElementById('timerTime');
+            if (timerTime) {
+                timerTime.textContent = timeString;
                 
-                if (entryDate === checkDate && !uniqueDays.has(entryDate)) {
-                    uniqueDays.add(entryDate);
-                    streak++;
-                    currentDate.setDate(currentDate.getDate() - 1);
-                } else if (!uniqueDays.has(entryDate)) {
-                    break;
-                }
-            }
-            
-            document.getElementById('streak').textContent = streak;
-        }
-
-        function findBestDay() {
-            if (moodData.length === 0) {
-                document.getElementById('bestDay').textContent = '-';
-                return;
-            }
-            
-            const bestEntry = moodData.reduce((best, entry) => 
-                entry.mood > best.mood ? entry : best
-            );
-            
-            const date = new Date(bestEntry.timestamp);
-            const dayName = date.toLocaleDateString('de-DE', { weekday: 'short' });
-            document.getElementById('bestDay').textContent = `${dayName} ${bestEntry.mood}/10`;
-        }
-
-        function calculateTrend() {
-            if (moodData.length < 2) {
-                document.getElementById('improvement').textContent = '-';
-                return;
-            }
-            
-            const recent = moodData.slice(-7).reduce((sum, entry) => sum + entry.mood, 0) / Math.min(7, moodData.length);
-            const older = moodData.slice(-14, -7);
-            
-            if (older.length === 0) {
-                document.getElementById('improvement').textContent = '-';
-                return;
-            }
-            
-            const olderAvg = older.reduce((sum, entry) => sum + entry.mood, 0) / older.length;
-            const trend = recent - olderAvg;
-            
-            const trendEmoji = trend > 0.5 ? '📈' : trend < -0.5 ? '📉' : '➡️';
-            document.getElementById('improvement').textContent = `${trendEmoji} ${trend >= 0 ? '+' : ''}${trend.toFixed(1)}`;
-        }
-
-        function updateTemplateGrid() {
-            const grid = document.getElementById('templateGrid');
-            const allTemplates = [...TEMPLATES.low, ...TEMPLATES.medium, ...TEMPLATES.high];
-            
-            grid.innerHTML = allTemplates.map(template => `
-                <div class="template-card" onclick="shareTemplate('${template.text.replace(/'/g, "\\'")}')">
-                    <div class="template-text">${template.text}</div>
-                    <div class="template-meta">
-                        <span>${template.category}</span>
-                        <span>${FEATURES.webShare ? '📤 Teilen' : '📋 Kopieren'}</span>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function updateCharts() {
-            drawMoodChart();
-            drawWeatherChart();
-        }
-
-        function drawMoodChart() {
-            const canvas = document.getElementById('moodChart');
-            const ctx = canvas.getContext('2d');
-            const rect = canvas.getBoundingClientRect();
-            
-            // Set canvas size
-            canvas.width = rect.width * window.devicePixelRatio;
-            canvas.height = rect.height * window.devicePixelRatio;
-            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-            
-            const width = rect.width;
-            const height = rect.height;
-            
-            // Clear canvas
-            ctx.clearRect(0, 0, width, height);
-            
-            if (moodData.length === 0) {
-                ctx.fillStyle = '#999';
-                ctx.font = '14px sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText('Noch keine Daten vorhanden', width / 2, height / 2);
-                return;
-            }
-            
-            // Get last 7 days data
-            const last7Days = [];
-            for (let i = 6; i >= 0; i--) {
-                const date = new Date();
-                date.setDate(date.getDate() - i);
-                const dayData = moodData.filter(entry => 
-                    new Date(entry.timestamp).toDateString() === date.toDateString()
-                );
+                const percentage = messageTimer.remaining / messageTimer.duration;
                 
-                const avgMood = dayData.length > 0 
-                    ? dayData.reduce((sum, entry) => sum + entry.mood, 0) / dayData.length 
-                    : null;
-                
-                last7Days.push({
-                    date: date,
-                    mood: avgMood,
-                    label: date.toLocaleDateString('de-DE', { weekday: 'short' })
-                });
-            }
-            
-            const padding = 40;
-            const chartWidth = width - 2 * padding;
-            const chartHeight = height - 2 * padding;
-            
-            // Draw grid
-            ctx.strokeStyle = '#e0e0e0';
-            ctx.lineWidth = 1;
-            
-            // Horizontal lines
-            for (let i = 0; i <= 10; i++) {
-                const y = padding + (chartHeight * (10 - i)) / 10;
-                ctx.beginPath();
-                ctx.moveTo(padding, y);
-                ctx.lineTo(width - padding, y);
-                ctx.stroke();
-            }
-            
-            // Draw mood line
-            ctx.strokeStyle = '#667eea';
-            ctx.lineWidth = 3;
-            ctx.beginPath();
-            
-            let hasValidData = false;
-            last7Days.forEach((day, index) => {
-                if (day.mood !== null) {
-                    const x = padding + (chartWidth * index) / 6;
-                    const y = padding + (chartHeight * (10 - day.mood)) / 10;
-                    
-                    if (!hasValidData) {
-                        ctx.moveTo(x, y);
-                        hasValidData = true;
-                    } else {
-                        ctx.lineTo(x, y);
-                    }
-                }
-            });
-            
-            if (hasValidData) {
-                ctx.stroke();
-                
-                // Draw points
-                ctx.fillStyle = '#667eea';
-                last7Days.forEach((day, index) => {
-                    if (day.mood !== null) {
-                        const x = padding + (chartWidth * index) / 6;
-                        const y = padding + (chartHeight * (10 - day.mood)) / 10;
-                        
-                        ctx.beginPath();
-                        ctx.arc(x, y, 4, 0, 2 * Math.PI);
-                        ctx.fill();
-                    }
-                });
-            }
-            
-            // Draw labels
-            ctx.fillStyle = '#666';
-            ctx.font = '12px sans-serif';
-            ctx.textAlign = 'center';
-            
-            last7Days.forEach((day, index) => {
-                const x = padding + (chartWidth * index) / 6;
-                ctx.fillText(day.label, x, height - 10);
-            });
-        }
-
-        function drawWeatherChart() {
-            const canvas = document.getElementById('weatherChart');
-            const ctx = canvas.getContext('2d');
-            const rect = canvas.getBoundingClientRect();
-            
-            canvas.width = rect.width * window.devicePixelRatio;
-            canvas.height = rect.height * window.devicePixelRatio;
-            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-            
-            const width = rect.width;
-            const height = rect.height;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            if (moodData.length === 0) {
-                ctx.fillStyle = '#999';
-                ctx.font = '14px sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText('Noch keine Wetterdaten vorhanden', width / 2, height / 2);
-                return;
-            }
-            
-            // Group data by weather conditions
-            const weatherGroups = {};
-            moodData.forEach(entry => {
-                if (entry.weatherDesc) {
-                    if (!weatherGroups[entry.weatherDesc]) {
-                        weatherGroups[entry.weatherDesc] = [];
-                    }
-                    weatherGroups[entry.weatherDesc].push(entry.mood);
-                }
-            });
-            
-            const weatherTypes = Object.keys(weatherGroups);
-            if (weatherTypes.length === 0) {
-                ctx.fillStyle = '#999';
-                ctx.font = '14px sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText('Keine Wetter-Korrelation verfügbar', width / 2, height / 2);
-                return;
-            }
-            
-            // Calculate averages
-            const weatherAverages = weatherTypes.map(type => ({
-                type: type,
-                avg: weatherGroups[type].reduce((sum, mood) => sum + mood, 0) / weatherGroups[type].length,
-                count: weatherGroups[type].length
-            }));
-            
-            // Draw bars
-            const barWidth = (width - 80) / weatherAverages.length;
-            const maxHeight = height - 60;
-            
-            weatherAverages.forEach((weather, index) => {
-                const x = 40 + index * barWidth;
-                const barHeight = (weather.avg / 10) * maxHeight;
-                const y = height - 40 - barHeight;
-                
-                // Draw bar
-                ctx.fillStyle = '#667eea';
-                ctx.fillRect(x + 5, y, barWidth - 10, barHeight);
-                
-                // Draw label
-                ctx.fillStyle = '#666';
-                ctx.font = '10px sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText(weather.type, x + barWidth / 2, height - 20);
-                
-                // Draw value
-                ctx.fillStyle = '#333';
-                ctx.fillText(weather.avg.toFixed(1), x + barWidth / 2, y - 5);
-            });
-        }
-
-        async function loadWeather() {
-            try {
-                // Check cache first
-                const cached = localStorage.getItem('weatherCache');
-                if (cached) {
-                    const { data, timestamp } = JSON.parse(cached);
-                    if (Date.now() - timestamp < CONFIG.CACHE_DURATION) {
-                        weatherData = data;
-                        updateWeatherDisplay();
-                        return;
-                    }
-                }
-                
-                // Fetch new weather data
-                const response = await fetch(
-                    `https://api.openweathermap.org/data/2.5/weather?q=${CONFIG.LOCATION}&appid=${CONFIG.WEATHER_API_KEY}&units=metric&lang=de`
-                );
-                
-                if (response.ok) {
-                    weatherData = await response.json();
-                    
-                    // Cache the data
-                    localStorage.setItem('weatherCache', JSON.stringify({
-                        data: weatherData,
-                        timestamp: Date.now()
-                    }));
-                    
-                    updateWeatherDisplay();
-                    console.log('🌤️ Weather data loaded successfully');
+                if (percentage > 0.5) {
+                    timerTime.style.color = '#667eea';
+                } else if (percentage > 0.25) {
+                    timerTime.style.color = '#f39c12';
                 } else {
-                    throw new Error(`Weather API error: ${response.status}`);
-                }
-            } catch (err) {
-                console.warn('Failed to load weather:', err);
-                document.getElementById('weatherInfo').innerHTML = '🌍 Wetter nicht verfügbar';
-            }
-        }
-
-        function updateWeatherDisplay() {
-            if (!weatherData) return;
-            
-            const temp = Math.round(weatherData.main.temp);
-            const description = weatherData.weather[0].description;
-            const icon = getWeatherEmoji(weatherData.weather[0].main);
-            
-            document.getElementById('weatherInfo').innerHTML = 
-                `${icon} ${temp}°C, ${description}`;
-        }
-
-        function getWeatherEmoji(condition) {
-            const emojis = {
-                'Clear': '☀️',
-                'Clouds': '☁️',
-                'Rain': '🌧️',
-                'Snow': '❄️',
-                'Thunderstorm': '⛈️',
-                'Drizzle': '🌦️',
-                'Mist': '🌫️',
-                'Fog': '🌫️'
-            };
-            return emojis[condition] || '🌤️';
-        }
-
-        function showSection(sectionName) {
-            // Update nav tabs
-            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Update sections
-            document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
-            document.getElementById(sectionName).classList.add('active');
-            
-            // Update template display when switching to templates
-            if (sectionName === 'templates') {
-                updateCurrentTemplate();
-            }
-        }
-
-        function exportData() {
-            const exportObj = {
-                moodData: moodData,
-                exportDate: new Date().toISOString(),
-                version: '1.0',
-                appName: 'Message Motivation Tracker'
-            };
-            
-            const dataStr = JSON.stringify(exportObj, null, 2);
-            const dataBlob = new Blob([dataStr], { type: 'application/json' });
-            
-            if (FEATURES.webShare && navigator.canShare && navigator.canShare({ files: [new File([dataBlob], 'mood-data.json')] })) {
-                const file = new File([dataBlob], 'message-motivation-export.json', { type: 'application/json' });
-                navigator.share({
-                    title: 'Message Motivation Daten',
-                    files: [file]
-                });
-            } else {
-                // Fallback download
-                const url = URL.createObjectURL(dataBlob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `message-motivation-export-${new Date().toISOString().split('T')[0]}.json`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            }
-            
-            showToast('📤 Daten exportiert');
-        }
-
-        function createBackup() {
-            const backupData = {
-                moodData: moodData,
-                settings: {
-                    weatherEnabled: document.getElementById('weatherEnabled').checked,
-                    notificationsEnabled: document.getElementById('notificationsEnabled').checked
-                },
-                metadata: {
-                    created: new Date().toISOString(),
-                    version: '1.0',
-                    appName: 'Message Motivation Tracker',
-                    entryCount: moodData.length,
-                    device: navigator.userAgent,
-                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
-                }
-            };
-            
-            const dataStr = JSON.stringify(backupData, null, 2);
-            const dataBlob = new Blob([dataStr], { type: 'application/json' });
-            
-            // Try Web Share API first
-            if (FEATURES.webShare && navigator.canShare) {
-                try {
-                    const file = new File([dataBlob], `backup-${new Date().toISOString().split('T')[0]}.json`, { 
-                        type: 'application/json' 
-                    });
-                    
-                    if (navigator.canShare({ files: [file] })) {
-                        navigator.share({
-                            title: 'Message Motivation Backup',
-                            text: `Backup mit ${moodData.length} Einträgen`,
-                            files: [file]
-                        });
-                        showToast('📤 Backup geteilt');
-                        return;
-                    }
-                } catch (err) {
-                    console.warn('Web Share failed, using download fallback');
+                    timerTime.style.color = '#e74c3c';
                 }
             }
-            
-            // Fallback: Direct download
-            const url = URL.createObjectURL(dataBlob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `message-motivation-backup-${new Date().toISOString().split('T')[0]}.json`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            showToast('💾 Backup erstellt und heruntergeladen');
         }
 
-        function importBackup(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const backupData = JSON.parse(e.target.result);
-                    
-                    // Validate backup structure
-                    if (!backupData.moodData || !Array.isArray(backupData.moodData)) {
-                        throw new Error('Ungültiges Backup-Format: moodData fehlt oder ist kein Array');
-                    }
-                    
-                    // Validate each mood entry
-                    const validEntries = backupData.moodData.filter(entry => {
-                        return entry.timestamp && 
-                               typeof entry.mood === 'number' && 
-                               entry.mood >= 1 && 
-                               entry.mood <= 10;
-                    });
-                    
-                    if (validEntries.length === 0) {
-                        throw new Error('Keine gültigen Mood-Einträge im Backup gefunden');
-                    }
-                    
-                    // Ask user if they want to merge or replace
-                    const action = confirm(
-                        `Backup gefunden mit ${validEntries.length} Einträgen.\n\n` +
-                        `OK = Zu bestehenden Daten hinzufügen\n` +
-                        `Abbrechen = Bestehende Daten ersetzen`
-                    );
-                    
-                    if (action) {
-                        // Merge data
-                        const existingTimestamps = new Set(moodData.map(entry => entry.timestamp));
-                        const newEntries = validEntries.filter(entry => !existingTimestamps.has(entry.timestamp));
-                        moodData.push(...newEntries);
-                        showToast(`✅ ${newEntries.length} neue Einträge hinzugefügt`);
-                    } else {
-                        // Replace data
-                        if (confirm('Wirklich alle bestehenden Daten ersetzen?')) {
-                            moodData = validEntries;
-                            showToast(`✅ Daten ersetzt mit ${validEntries.length} Einträgen`);
-                        } else {
-                            return;
-                        }
-                    }
-                    
-                    // Restore settings if available
-                    if (backupData.settings) {
-                        if (typeof backupData.settings.weatherEnabled === 'boolean') {
-                            document.getElementById('weatherEnabled').checked = backupData.settings.weatherEnabled;
-                        }
-                        if (typeof backupData.settings.notificationsEnabled === 'boolean') {
-                            document.getElementById('notificationsEnabled').checked = backupData.settings.notificationsEnabled;
-                        }
-                    }
-                    
-                    // Save imported data
-                    saveMoodData();
-                    updateUI();
-                    
-                    // Show import summary
-                    showImportSummary(backupData);
-                    
-                } catch (err) {
-                    console.error('Import error:', err);
-                    alert(`❌ Import fehlgeschlagen: ${err.message}`);
-                }
-            };
-            
-            reader.readAsText(file);
-            
-            // Reset file input
-            event.target.value = '';
-        }
-
-        function showImportSummary(backupData) {
-            const metadata = backupData.metadata || {};
-            const summary = `
-📥 Import erfolgreich!
-
-📊 Daten:
-• ${backupData.moodData.length} Mood-Einträge
-• Erstellt: ${metadata.created ? new Date(metadata.created).toLocaleDateString('de-DE') : 'Unbekannt'}
-• App Version: ${metadata.version || 'Unbekannt'}
-
-✅ Alle Daten wurden gespeichert und sind jetzt verfügbar.
-            `.trim();
-            
-            alert(summary);
-        }
-
-        function createQRBackup() {
-            // Create minimal backup for QR code (size limit)
-            const minimalBackup = {
-                moodData: moodData.slice(-20), // Last 20 entries only
-                created: new Date().toISOString(),
-                version: '1.0',
-                type: 'qr-backup'
-            };
-            
-            const dataStr = JSON.stringify(minimalBackup);
-            
-            // Check size limit (QR codes have data limits)
-            if (dataStr.length > 2000) {
-                alert('❌ Zu viele Daten für QR-Code. Verwende reguläres Backup für große Datenmengen.');
-                return;
-            }
-            
-            try {
-                generateQRCode(dataStr);
-                document.getElementById('qrCodeContainer').style.display = 'block';
-                showToast('📱 QR-Code generiert (letzte 20 Einträge)');
-            } catch (err) {
-                console.error('QR generation failed:', err);
-                alert('❌ QR-Code Generierung fehlgeschlagen');
-            }
-        }
-
-        function generateQRCode(data) {
-            // Simple QR code generation (basic implementation)
-            // In production, you'd use a library like qrcode.js
-            const canvas = document.getElementById('qrCanvas');
-            const ctx = canvas.getContext('2d');
-            
-            // Clear canvas
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, 200, 200);
-            
-            // For demo: create a data URL that contains the backup
-            const dataUrl = 'data:application/json;base64,' + btoa(data);
-            
-            // Simple pattern as QR placeholder
-            ctx.fillStyle = '#000000';
-            const size = 8;
-            const hash = simpleHash(data);
-            
-            for (let i = 0; i < 25; i++) {
-                for (let j = 0; j < 25; j++) {
-                    if ((hash + i * j) % 3 === 0) {
-                        ctx.fillRect(i * size, j * size, size, size);
-                    }
-                }
-            }
-            
-            // Add border
-            ctx.strokeStyle = '#000000';
-            ctx.lineWidth = 2;
-            ctx.strokeRect(0, 0, 200, 200);
-            
-            // Store data for QR scanning simulation
-            canvas.dataset.qrData = data;
-            
-            // Add click handler for "scanning" simulation
-            canvas.onclick = function() {
-                if (confirm('QR-Code Daten importieren? (Simulation)')) {
-                    try {
-                        const qrData = JSON.parse(this.dataset.qrData);
-                        importQRData(qrData);
-                    } catch (err) {
-                        alert('❌ QR-Code Daten ungültig');
-                    }
-                }
-            };
-        }
-
-        function importQRData(qrData) {
-            if (!qrData.moodData || qrData.type !== 'qr-backup') {
-                alert('❌ Ungültiger QR-Code');
-                return;
-            }
-            
-            const existingTimestamps = new Set(moodData.map(entry => entry.timestamp));
-            const newEntries = qrData.moodData.filter(entry => !existingTimestamps.has(entry.timestamp));
-            
-            if (newEntries.length === 0) {
-                alert('ℹ️ Keine neuen Daten im QR-Code');
-                return;
-            }
-            
-            moodData.push(...newEntries);
-            saveMoodData();
-            updateUI();
-            
-            showToast(`✅ ${newEntries.length} Einträge aus QR-Code importiert`);
-        }
-
-        function simpleHash(str) {
-            let hash = 0;
-            for (let i = 0; i < str.length; i++) {
-                const char = str.charCodeAt(i);
-                hash = ((hash << 5) - hash) + char;
-                hash = hash & hash; // Convert to 32bit integer
-            }
-            return Math.abs(hash);
-        }
-
-        function showAutoBackup() {
-            const autoBackupInfo = `
-🔄 Automatisches Backup
-
-Die App speichert deine Daten automatisch:
-
-📱 Lokal:
-• IndexedDB (persistent bei Home Screen Apps)
-• localStorage (Fallback)
-• Cache API (zwischen Safari/PWA geteilt)
-
-☁️ Manuelles Backup:
-• Erstelle regelmäßig Backups über "Backup erstellen"
-• Speichere Backups in iCloud, Google Drive, etc.
-• QR-Code für schnellen Transfer zwischen Geräten
-
-⚠️ Wichtig:
-• Bei App-Löschung gehen Daten verloren
-• iOS kann Daten nach 7 Tagen Inaktivität löschen (nur im Browser-Modus)
-• Home Screen Apps sind vor automatischer Löschung geschützt
-
-💡 Tipp: Verwende "Backup erstellen" einmal pro Woche
-            `.trim();
-            
-            alert(autoBackupInfo);
-        }
-
-        function clearAllData() {
-            if (confirm('Wirklich alle Daten löschen? Das kann nicht rückgängig gemacht werden.')) {
-                moodData = [];
-                localStorage.removeItem('moodData');
-                localStorage.removeItem('weatherCache');
-                updateUI();
-                showToast('🗑️ Alle Daten gelöscht');
-            }
-        }
-
-        function checkiOSInstall() {
-            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-            const isStandalone = FEATURES.standalone;
-            
-            if (isIOS && !isStandalone) {
-                setTimeout(() => {
-                    document.getElementById('iosInstall').classList.add('show');
-                }, 3000);
-            }
-        }
-
-        function dismissInstallPrompt() {
-            document.getElementById('iosInstall').classList.remove('show');
-        }
-
-        function showInstallInstructions() {
-            alert(`📱 App Installation (iOS):
-
-1. Tippe auf das Teilen-Symbol (□↑) unten
-2. Scrolle runter und wähle "Zum Home-Bildschirm"
-3. Tippe "Hinzufügen"
-4. Die App erscheint auf deinem Home-Bildschirm
-
-Für Android:
-1. Tippe auf die drei Punkte (⋮) im Browser
-2. Wähle "App installieren" oder "Zum Startbildschirm hinzufügen"`);
-        }
-
-        function updateOnlineStatus() {
-            const isOnline = navigator.onLine;
-            const indicator = document.getElementById('offlineIndicator');
-            
-            if (!isOnline) {
-                indicator.classList.add('show');
-            } else {
-                indicator.classList.remove('show');
-            }
-        }
-
-        async function registerServiceWorker() {
-            try {
-                const swCode = `
-                const CACHE_NAME = 'message-motivation-v1';
-                const urlsToCache = [
-                    '/',
-                    '/index.html'
-                ];
-
-                self.addEventListener('install', event => {
-                    event.waitUntil(
-                        caches.open(CACHE_NAME)
-                            .then(cache => cache.addAll(urlsToCache))
-                    );
-                });
-
-                self.addEventListener('fetch', event => {
-                    event.respondWith(
-                        caches.match(event.request)
-                            .then(response => {
-                                if (response) {
-                                    return response;
-                                }
-                                return fetch(event.request).catch(() => {
-                                    if (event.request.mode === 'navigate') {
-                                        return caches.match('/');
-                                    }
-                                });
-                            })
-                    );
-                });
-                `;
-                
-                const blob = new Blob([swCode], { type: 'application/javascript' });
-                const swUrl = URL.createObjectURL(blob);
-                
-                const registration = await navigator.serviceWorker.register(swUrl);
-                console.log('✅ Service Worker registered successfully');
-            } catch (err) {
-                console.warn('Service Worker registration failed:', err);
-            }
-        }
-
+        // =================== UTILITY FUNCTIONS ===================
         function showToast(message) {
-            // Create toast element
             const toast = document.createElement('div');
-            toast.textContent = message;
+            toast.innerHTML = message;
             toast.style.cssText = `
                 position: fixed;
                 top: 20px;
@@ -1523,7 +1044,6 @@ Für Android:
             
             document.body.appendChild(toast);
             
-            // Remove after 3 seconds
             setTimeout(() => {
                 toast.style.opacity = '0';
                 setTimeout(() => {
@@ -1534,9 +1054,525 @@ Für Android:
             }, 3000);
         }
 
-        // Initialize mood display
-        updateMoodDisplay();
-        updateCurrentTemplate();
+        // =================== NAVIGATION ===================
+        function showSection(sectionName) {
+            console.log('Switching to:', sectionName);
+            
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionName).classList.add('active');
+            
+            if (sectionName === 'templates') {
+                updateCurrentTemplate();
+                updateTemplateGrid();
+            }
+        }
+
+        // Coach Flow
+        const COACH_FLOW = [
+            {
+                id: 'greeting',
+                message: 'Hi! Ich bin dein Message Coach. Wie geht es dir heute?',
+                type: 'options',
+                options: [
+                    { id: 'good', text: 'Ganz gut', subtitle: 'Ich fühle mich okay heute' },
+                    { id: 'mixed', text: 'Gemischt', subtitle: 'Mal so, mal so' },
+                    { id: 'difficult', text: 'Schwierig', subtitle: 'Es ist ein harter Tag' },
+                    { id: 'overwhelmed', text: 'Überwältigt', subtitle: 'Alles ist zu viel' }
+                ]
+            },
+            {
+                id: 'messages_feeling',
+                message: function(prev) {
+                    const responses = {
+                        good: 'Das freut mich! Wie fühlst du dich bei dem Gedanken an deine ungelesenen Nachrichten?',
+                        mixed: 'Verstehe. Lass uns schauen - wie geht es dir mit deinen Nachrichten heute?',
+                        difficult: 'Das tut mir leid. Magst du mir sagen, wie es dir mit Nachrichten geht?',
+                        overwhelmed: 'Das klingt anstrengend. Wie ist es gerade mit deinen Nachrichten?'
+                    };
+                    return responses[prev] || 'Wie fühlst du dich bei deinen Nachrichten?';
+                },
+                type: 'slider',
+                min: 1,
+                max: 10,
+                labels: ['😰 Überwältigt', '😊 Motiviert'],
+                question: 'Wie motiviert fühlst du dich gerade?'
+            },
+            {
+                id: 'final',
+                message: function(prev, responses) {
+                    const mood = responses.messages_feeling || 5;
+                    if (mood <= 3) {
+                        return 'Bei deiner aktuellen Stimmung empfehle ich dir: kleine Schritte und Templates nutzen. Du schaffst das! 💙';
+                    } else if (mood >= 8) {
+                        return 'Du wirkst motiviert! Nutze diese Energie für deine Nachrichten! ⚡';
+                    }
+                    return 'Du bist in einer stabilen Phase. Geh in deinem Tempo vor und nutze die Tools, die dir helfen. 🌱';
+                },
+                type: 'final'
+            }
+        ];
+
+        // Templates
+        const TEMPLATES = {
+            low: [
+                { text: "Sorry für die späte Antwort, mir ging es nicht so gut 😔", category: "Ehrlich" },
+                { text: "Hi! Kurze Antwort heute - mir fällt kommunizieren momentan schwer 💙", category: "Freundlich" }
+            ],
+            medium: [
+                { text: "Hey! Danke für deine Nachricht. Mir geht's okay 😊", category: "Neutral" },
+                { text: "Hallo! Entschuldige die Verspätung, war etwas beschäftigt 🙂", category: "Freundlich" }
+            ],
+            high: [
+                { text: "Hey! Danke für deine Nachricht! Mir geht's heute richtig gut 😊", category: "Positiv" },
+                { text: "Hi! Schön von dir zu hören! Ich bin heute motiviert ✨", category: "Energisch" }
+            ]
+        };
+
+        // Navigation
+        function showSection(sectionName) {
+            console.log('Switching to:', sectionName);
+            
+            // Update nav tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionName).classList.add('active');
+            
+            if (sectionName === 'templates') {
+                updateCurrentTemplate();
+                updateTemplateGrid();
+            }
+        }
+
+        // Mood Functions
+        function updateMoodDisplay() {
+            const moodEmojis = ['😭', '😰', '😟', '😐', '😐', '🙂', '🙂', '😊', '😊', '😄'];
+            const display = document.getElementById('moodDisplay');
+            if (display) {
+                display.innerHTML = `${moodEmojis[currentMood - 1]} ${currentMood}/10`;
+            }
+        }
+
+        function saveMoodEntry() {
+            const messageCount = document.getElementById('messageCount').value || 0;
+            const entry = {
+                timestamp: new Date().toISOString(),
+                mood: currentMood,
+                messageCount: parseInt(messageCount)
+            };
+            
+            moodData.push(entry);
+            updateStats();
+            
+            document.getElementById('messageCount').value = '';
+            showToast(`✅ Stimmung ${currentMood}/10 gespeichert`);
+        }
+
+        function updateStats() {
+            const todayEntries = moodData.filter(entry => {
+                return new Date(entry.timestamp).toDateString() === new Date().toDateString();
+            }).length;
+            
+            document.getElementById('todayEntries').textContent = todayEntries;
+            document.getElementById('totalEntries').textContent = moodData.length;
+            
+            if (moodData.length > 0) {
+                const last7Days = moodData.slice(-7);
+                const avgMood = (last7Days.reduce((sum, entry) => sum + entry.mood, 0) / last7Days.length).toFixed(1);
+                document.getElementById('avgMood').textContent = avgMood;
+            }
+        }
+
+        // Template Functions
+        function updateCurrentTemplate() {
+            const templateDiv = document.getElementById('currentMoodTemplate');
+            if (!templateDiv) return;
+            
+            let templates;
+            if (currentMood <= 3) {
+                templates = TEMPLATES.low;
+            } else if (currentMood <= 7) {
+                templates = TEMPLATES.medium;
+            } else {
+                templates = TEMPLATES.high;
+            }
+            
+            const randomTemplate = templates[Math.floor(Math.random() * templates.length)];
+            templateDiv.innerHTML = `
+                <div style="background: rgba(102, 126, 234, 0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">
+                    <div style="margin-bottom: 10px;">${randomTemplate.text}</div>
+                    <button class="btn" onclick="shareTemplate('${randomTemplate.text}')">
+                        📋 Kopieren
+                    </button>
+                </div>
+            `;
+        }
+
+        function updateTemplateGrid() {
+            const grid = document.getElementById('templateGrid');
+            if (!grid) return;
+            
+            const allTemplates = [].concat(TEMPLATES.low, TEMPLATES.medium, TEMPLATES.high);
+            
+            grid.innerHTML = allTemplates.map(template => `
+                <div class="template-card" onclick="shareTemplate('${template.text}')">
+                    <div class="template-text">${template.text}</div>
+                    <div class="template-meta">
+                        <span>${template.category}</span>
+                        <span>📋 Kopieren</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function shareTemplate(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('✅ In Zwischenablage kopiert');
+            }).catch(() => {
+                showToast('❌ Kopieren fehlgeschlagen');
+            });
+        }
+
+        // Coach Functions
+        function startCoach() {
+            coachState = {
+                step: 0,
+                responses: {},
+                isActive: true
+            };
+            
+            const conversationDiv = document.getElementById('coachConversation');
+            conversationDiv.innerHTML = '';
+            
+            setTimeout(() => {
+                showTypingIndicator();
+                setTimeout(() => {
+                    removeTypingIndicator();
+                    showCoachStep();
+                }, 1500);
+            }, 500);
+        }
+
+        function resetCoach() {
+            startCoach();
+        }
+
+        function skipToMood() {
+            showSection('mood');
+            showToast('💡 Erfasse hier deine Stimmung!');
+        }
+
+        function showTypingIndicator() {
+            const conversationDiv = document.getElementById('coachConversation');
+            if (!conversationDiv) return;
+            
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.innerHTML = `
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            `;
+            typingDiv.id = 'typingIndicator';
+            conversationDiv.appendChild(typingDiv);
+            conversationDiv.scrollTop = conversationDiv.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const typing = document.getElementById('typingIndicator');
+            if (typing) typing.remove();
+        }
+
+        function addCoachMessage(message, isUser = false) {
+            const conversationDiv = document.getElementById('coachConversation');
+            if (!conversationDiv) return;
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `coach-message ${isUser ? 'user' : 'bot'}`;
+            
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = `message-bubble ${isUser ? 'user' : 'bot'}`;
+            bubbleDiv.textContent = message;
+            
+            messageDiv.appendChild(bubbleDiv);
+            conversationDiv.appendChild(messageDiv);
+            conversationDiv.scrollTop = conversationDiv.scrollHeight;
+        }
+
+        function showCoachStep() {
+            if (coachState.step >= COACH_FLOW.length) {
+                finishCoachSession();
+                return;
+            }
+            
+            const currentStep = COACH_FLOW[coachState.step];
+            let message = currentStep.message;
+            
+            // Handle dynamic messages
+            if (typeof message === 'function') {
+                const prevResponse = coachState.step > 0 ? 
+                    coachState.responses[COACH_FLOW[coachState.step - 1].id] : null;
+                message = message(prevResponse, coachState.responses);
+            }
+            
+            addCoachMessage(message);
+            renderCoachInput(currentStep);
+        }
+
+        function renderCoachInput(step) {
+            const inputArea = document.getElementById('coachInputArea');
+            if (!inputArea) return;
+            
+            switch (step.type) {
+                case 'options':
+                    inputArea.innerHTML = `
+                        <div class="coach-options">
+                            ${step.options.map(option => `
+                                <div class="coach-option" onclick="selectCoachOption('${step.id}', '${option.id}', '${option.text}')">
+                                    <div class="option-title">${option.text}</div>
+                                    <div class="option-subtitle">${option.subtitle}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    break;
+                    
+                case 'slider':
+                    inputArea.innerHTML = `
+                        <div style="padding: 20px 0;">
+                            <div style="font-size: 14px; margin-bottom: 10px; text-align: center;">${step.question}</div>
+                            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 10px;">
+                                <span>${step.labels[0]}</span>
+                                <span>${step.labels[1]}</span>
+                            </div>
+                            <input type="range" class="mood-slider" min="${step.min}" max="${step.max}" value="5" 
+                                   onchange="selectCoachSlider('${step.id}', this.value)" id="coachSlider">
+                            <div style="text-align: center; margin-top: 10px;">
+                                <span id="coachSliderValue">5/10</span>
+                            </div>
+                            <button class="btn" onclick="confirmSliderValue('${step.id}')" style="margin-top: 15px;">
+                                Bestätigen
+                            </button>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'final':
+                    inputArea.innerHTML = `
+                        <div style="text-align: center; padding: 20px;">
+                            <button class="btn" onclick="finishCoachSession()">
+                                ✨ Zu den Tools
+                            </button>
+                        </div>
+                    `;
+                    break;
+            }
+        }
+
+        function selectCoachOption(stepId, optionId, optionText) {
+            coachState.responses[stepId] = optionId;
+            addCoachMessage(optionText, true);
+            
+            setTimeout(() => {
+                coachState.step++;
+                showTypingIndicator();
+                setTimeout(() => {
+                    removeTypingIndicator();
+                    showCoachStep();
+                }, 1000);
+            }, 500);
+        }
+
+        let tempSliderValue = 5;
+
+        function selectCoachSlider(stepId, value) {
+            tempSliderValue = parseInt(value);
+            const sliderValue = document.getElementById('coachSliderValue');
+            if (sliderValue) {
+                sliderValue.textContent = `${value}/10`;
+            }
+        }
+
+        function confirmSliderValue(stepId) {
+            coachState.responses[stepId] = tempSliderValue;
+            addCoachMessage(`${tempSliderValue}/10`, true);
+            
+            setTimeout(() => {
+                coachState.step++;
+                showTypingIndicator();
+                setTimeout(() => {
+                    removeTypingIndicator();
+                    showCoachStep();
+                }, 1000);
+            }, 500);
+        }
+
+        function finishCoachSession() {
+            const mood = coachState.responses.messages_feeling;
+            
+            // Set mood value if provided
+            if (mood) {
+                currentMood = mood;
+                const moodSlider = document.getElementById('moodSlider');
+                if (moodSlider) {
+                    moodSlider.value = mood;
+                }
+                updateMoodDisplay();
+                updateCurrentTemplate();
+            }
+            
+            // Navigate to templates
+            showSection('templates');
+            
+            // Show appropriate toast
+            if (mood <= 4) {
+                showToast('💡 Schau dir die Templates für schwere Tage an');
+            } else if (mood >= 7) {
+                showToast('🚀 Du wirkst motiviert! Nutze die Energie!');
+            } else {
+                showToast('✨ Du findest passende Templates im aktuellen Tab');
+            }
+        }
+
+        // Data Management
+        function exportData() {
+            const exportObj = {
+                moodData: moodData,
+                exportDate: new Date().toISOString(),
+                version: '1.0'
+            };
+            
+            const dataStr = JSON.stringify(exportObj, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            
+            const url = URL.createObjectURL(dataBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `mood-export-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showToast('📤 Daten exportiert');
+        }
+
+        function importData() {
+            document.getElementById('importFile').click();
+        }
+
+        function handleFileImport(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    if (importedData.moodData && Array.isArray(importedData.moodData)) {
+                        moodData = moodData.concat(importedData.moodData);
+                        updateStats();
+                        showToast(`✅ ${importedData.moodData.length} Einträge importiert`);
+                    } else {
+                        throw new Error('Ungültiges Format');
+                    }
+                } catch (error) {
+                    showToast('❌ Import fehlgeschlagen');
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+
+        function clearAllData() {
+            if (confirm('Wirklich alle Daten löschen?')) {
+                moodData = [];
+                updateStats();
+                showToast('🗑️ Alle Daten gelöscht');
+            }
+        }
+
+        // Utility Functions
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.innerHTML = message;
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0, 0, 0, 0.8);
+                color: white;
+                padding: 10px 20px;
+                border-radius: 20px;
+                font-size: 14px;
+                z-index: 10000;
+                transition: opacity 0.3s ease;
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        document.body.removeChild(toast);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make functions globally available for onclick handlers
+            window.startMessageTimer = startMessageTimer;
+            window.showCustomTimer = showCustomTimer;
+            window.setCustomTimer = setCustomTimer;
+            window.toggleTimer = toggleTimer;
+            window.resetTimer = resetTimer;
+            window.stopTimer = stopTimer;
+            window.startCoach = startCoach;
+            window.resetCoach = resetCoach;
+            window.skipToMood = skipToMood;
+            window.selectCoachOption = selectCoachOption;
+            window.confirmSliderValue = confirmSliderValue;
+            window.finishCoachSession = finishCoachSession;
+            window.saveMoodEntry = saveMoodEntry;
+            window.shareTemplate = shareTemplate;
+            window.exportData = exportData;
+            window.importData = importData;
+            window.handleFileImport = handleFileImport;
+            window.clearAllData = clearAllData;
+            
+            const moodSlider = document.getElementById('moodSlider');
+            if (moodSlider) {
+                moodSlider.addEventListener('input', function() {
+                    currentMood = parseInt(this.value);
+                    updateMoodDisplay();
+                    updateCurrentTemplate();
+                });
+            }
+            
+            updateMoodDisplay();
+            updateCurrentTemplate();
+            updateTemplateGrid();
+            updateStats();
+            
+            console.log('✅ App initialized - all functions available globally');
+        });
     </script>
 </body>
 </html>
